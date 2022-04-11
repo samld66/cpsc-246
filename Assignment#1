@@ -1,0 +1,93 @@
+//Samantha Duffy Assignment #1
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+//Minimum program
+int getLowest(int numbers[], int n){
+int min = numbers[0];
+for(int i=1; i<n; i++){
+if(numbers[i] < min){
+min = numbers[i];
+}
+}
+return min;
+}
+
+//Maximum program
+int getHighest(int numbers[], int n){
+int max = numbers[0];
+for(int i=1; i<n; i++){
+if(numbers[i] > max){
+max = numbers[i];
+}
+}
+return max;
+}
+
+//Sum Program
+int getSum(int numbers[], int n){
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum = sum + numbers[i];
+}
+return sum;
+} 
+
+//Average Program
+double getAverage(int numbers[], int n){
+   int sum = 0;
+    for (int i=0; i<n; i++)
+       sum += numbers[i];
+ 
+    return (double)sum/n;
+}
+
+//main func 
+int main(){
+    //defining variables.
+    const int myArray = 10;
+    int numbers[myArray];
+    int count = 0;
+    string fname;
+    ifstream inputfile;
+    int n = sizeof(numbers) / sizeof(numbers[0]);
+     
+cout << "Enter a file name: "; //prompts user to enter file name.
+cin >> fname; //inserts user input into fname variable.
+ cout << endl;
+
+//opens user input file.
+inputfile.open(fname);
+    while (count < myArray && inputfile >> numbers[count]) //iterates through file and inserts it into an array.
+    count++;
+
+    inputfile.close(); //closes file.
+
+    cout << "The numbers in this file are :"; //prints array contents.
+    for (count = 0; count < myArray; count++)
+    cout << numbers[count] << " ";
+    cout << endl;
+    cout << endl;
+
+cout << "Maximum: " //prints maximum function.
+         << getHighest(numbers, n);
+         cout << endl;
+         cout << endl;
+
+cout << "Minimum: " //prints minimum function.
+         << getLowest(numbers, n);
+         cout << endl;
+        cout << endl;
+
+ cout << "Sum of array: " << getSum(numbers, n); //prints sum function.
+  cout << endl;
+  cout << endl;
+
+  cout<<"Average: " << getAverage(numbers, n); //prints average function.
+  cout << endl;
+  cout << endl;
+
+return 0;
+}
