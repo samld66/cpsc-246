@@ -1,0 +1,115 @@
+#include <iostream>
+#include <fstream>
+#include <sstream>
+
+using namespace std;
+
+int read(char ch, ifstream &infile, ofstream &outfile) //read file copies contents from infile to outfile.
+{
+
+    if (infile)
+    {
+        // Read a char from file 1.
+        infile.get(ch);
+        // While the last read operation was // successful, continue.
+        while (infile)
+        {
+
+            outfile.put(ch);
+
+            infile.get(ch);
+        }
+        // Close the two files.
+        infile.close();
+        outfile.close();
+        cout << "File conversion done! Load Assignment 3 html file to see results!\n";
+        cout << endl;
+    }
+    return ch;
+}
+
+int main()
+{
+    char data[100];
+    char ch;
+    int ctr = 0;
+
+    string line;
+
+//assigns ifstream and ofstream to files
+    ifstream infile("input.txt");
+    ofstream outfile("Assignment3.html");
+//calls read function
+    read(ch, infile, outfile);
+//opens files
+    infile.open("input.txt");
+    outfile.open("Assignment3.html");
+//searches for certain letters 
+    char Start = 'S';
+    char Title = 'T';
+    char Row = 'R';
+//adds html, body, and center tags at start. 
+    if (infile.get(Start))
+    {
+        outfile << "<html>" << '\n';
+        outfile << "<body>" << '\n';
+        outfile << "<center>" << '\n';
+    }
+    while (getline(infile, line)) //reads file line by line.
+    {
+        outfile << "<style> table, td { border:1px solid black; } </style>" << '\n';
+
+        if (infile.get(Title)) //adds title.
+        {
+            outfile << "<h2>"
+                    << "CPSC-246 Assignment 3"
+                    << "</h2>" << '\n';
+        }
+        getline(infile, line);
+        outfile << "<table>" << '\n';
+        getline(infile, line);
+        outfile << "<tr>" << '\n';
+        getline(infile, line);
+
+        if (infile.get(Row)) //adds row 1 
+        {
+            outfile << "<td style = color:blue;>"
+                    << "Header 1"
+                    << "</td>"
+                    << "<td style = color:blue;>"
+                    << "Header 2"
+                    << "</td>"
+                    << "<td style = color:blue;>"
+                    << "Header 3"
+                    << "</td>";
+            outfile << "<body>" << '\n';
+        }
+
+        outfile << "</tr>" << '\n';
+        outfile << "<tr>" << '\n';
+        getline(infile, line);
+
+        if (infile.get(Row)) //adds row 2 
+        {
+            outfile << "<td style = color:red;>"
+                    << "Test 1"
+                    << "</td>"
+                    << "<td style = color:red;>"
+                    << "Test 2"
+                    << "</td>"
+                    << "<td style = color:red;>"
+                    << "Test 3"
+                    << "</td>";
+            outfile << "<body>" << '\n';
+        }
+
+        outfile << "</tr>" << '\n';
+        outfile << "</table>" << '\n';
+        outfile << "</body>" << endl
+                << "</html>" << '\n';
+        getline(infile, line);
+        getline(infile, line);
+        break;
+    }
+    return 0;
+}
