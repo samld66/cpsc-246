@@ -1,0 +1,102 @@
+#include <iostream>
+
+using namespace std;
+
+int read(int numbers[], int i);
+int display(int numbers[], int n);
+void swap(int *xp, int *yp);
+void bubble_Sorting(int numbers[], int n);
+int Binary_Searching(int arr[], int p, int r, int num);
+
+//reads user input into an array
+int read(int numbers[], int i){
+
+    cout << "Enter 15 numbers: " << endl;
+
+    //  store input from user to array
+    for (int i = 0; i < 15; ++i) {
+        cin >> numbers[i];
+    }
+      
+    return i;
+
+}
+//sorts array from least to greatest.
+void bubble_Sorting(int numbers[], int x)
+{
+for (int i = 0; i < x-1; i++)
+
+for (int j = 0; j < x-i-1; j++)
+ if (numbers[j] > numbers[j+1]) 
+  swap(&numbers[j], &numbers[j+1]);
+}
+void swap(int *xp, int *yp) {
+int temp = *xp; 
+*xp = *yp;
+*yp = temp;
+}
+//searches array for value input by user
+int Binary_Searching(int numbers[], int p, int r, int num)
+{
+if (p <= r) {
+int mid = (p + r)/2; if (numbers[mid] == num)
+return mid ;
+if (numbers[mid] > num)
+return Binary_Searching(numbers, p, mid-1, num);
+if (numbers[mid] < num)
+return Binary_Searching(numbers, mid+1, r, num);
+}
+return -1; 
+}
+//displays output.
+int Display(int numbers[], int n){
+for (int n = 0; n < 15; ++n) {
+        cout << numbers[n] << " ";
+    }
+
+    return n;
+}
+// main func
+int main(){
+int numbers[15];
+ int i;
+ int n;
+ int count;
+ int num;
+ int x = sizeof(numbers)/sizeof(numbers[0]);
+
+cout << "" << read(numbers, i);
+cout << endl;
+cout << endl;
+
+cout << "The numbers are: \n" << Display(numbers, n);
+cout << endl;
+cout << endl;
+
+bubble_Sorting(numbers, x);
+cout<<"Sorted array: \n";
+Display(numbers, n);
+cout << endl;
+
+cout << endl;
+cout << "Enter a number to search: \n"; cin >> num;
+ int index = Binary_Searching (numbers, 0, x-1, num);
+cout << endl;
+    if(index == -1){
+cout<< num <<" was not found in the array"; 
+}
+else
+{
+cout<< num <<" is found at index "<< index <<" in the array!";
+}
+cout << endl;
+cout << endl;
+
+return 0;
+}
+
+//test numbers: 14 2 13 27 1 5 24 10 21 11 26 3 15 9 17
+
+
+
+
