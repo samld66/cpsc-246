@@ -1,0 +1,88 @@
+#include <iostream>
+#include <string>
+#include <iomanip> //for table
+
+using namespace std;
+
+struct Player
+{
+    string name; //Player's Name
+    int Number;  //Player's Number
+    int Points;  //Point's Scored
+};
+
+int main()
+{
+
+    Player information[6]; //Array of struct
+    int index;             //loop counter
+    int sum = 0;
+    int max = 0;
+
+    cout << endl;
+    cout << "Enter the following information about 6 players." << endl;
+
+    for (index = 0; index < 6; index++) // loops 6 times to promt user information on each player.
+    {
+        cout << endl;
+        cout << "PLAYER #" << (index + 1) << endl;
+        cout << "---------------------" << endl;
+        cout << "Enter the Name of Player #" << (index + 1);
+        cout << ": ";
+        cin >> information[index].name;
+
+        cout << "Enter the Number of Player #" << (index + 1);
+        cout << ": ";
+        cin >> information[index].Number;
+
+        cout << "Enter the number of points scored by Player #" << (index + 1);
+        cout << ": ";
+        cin >> information[index].Points;
+        cout << endl;
+    }
+
+    cout // Makes table for player info headings.
+        << left
+        << setw(10)
+        << "NAME"
+        << left
+        << setw(10)
+        << "NUMBER"
+        << left
+        << setw(10)
+        << "POINTS SCORED"
+        << endl;
+
+    for (index = 0; index < 6; index++) //loops through array of players and adds their information to the table.
+    {
+        cout
+            << left << setw(10)
+            << information[index].name
+            << left
+            << setw(10)
+            << information[index].Number
+            << left
+            << setw(10)
+            << information[index].Points
+            << endl;
+    }
+
+    for (index = 0; index < 6; index++) //loop to add all points to find the sum and to find the maximum of points.
+    {
+
+        sum += information[index].Points;
+
+        if (information[max].Points < information[index].Points)
+            max = index;
+    }
+
+    cout << endl;
+    cout << "The total points scored by the team is: "; //displays total points.
+    cout << sum << endl;
+    cout << endl;
+    cout << "The Player with the most points is : " << information[max].name << ", they scored " << information[max].Points << " points"
+         << " and their player number is: " << information[max].Number << endl; //displays information about the player with the most points.
+    cout << endl;
+
+    return 0;
+}
